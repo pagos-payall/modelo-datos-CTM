@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project_d17" database="MongoDb" >
+	<schema name="ctm_historico" >
+		<table name="User" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="username" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="usernameCanonical" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="emailCanonical" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="enabled" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="password" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="roles" type="array" length="800" decimal="0" jt="4999545" mandatory="y" />
+			<column name="lastLogin" type="date" length="800" decimal="0" jt="91" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" />
+			<column name="groups" type="array" length="800" decimal="0" jt="4999545" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<index name="usernameCanonical_1" unique="UNIQUE_KEY" >
+				<column name="username" />
+			</index>
+			<index name="emailCanonical_1" unique="UNIQUE_KEY" >
+				<column name="email" />
+			</index>
+		</table>
+		<table name="UserGroup" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="roles" type="array" length="800" decimal="0" jt="4999545" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<index name="name_1" unique="UNIQUE_KEY" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="UserRole" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="rol" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="archivos_conciliacion" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="fecha_recaudacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_registro" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="banco" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="status" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="codigo_base" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo" type="string" length="800" decimal="0" jt="12" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="codigos_respuesta" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo_resp_mov" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_resp_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_resp_base" type="array" length="800" decimal="0" jt="4999545" />
+			<column name="schema_version" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lista_negra" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="cuenta" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="numero" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="titular" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="alias" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="activa" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="banco" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_cuenta_banco" virtual="y" to_schema="ctm_historico" to_table="banco" >
+				<fk_column name="banco" pk="_id" />
+			</fk>
+		</table>
+		<table name="cuenta_transacciones" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_cuenta" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="voucher" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="monto" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_registro" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_recaudacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_operacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_cuenta_transacciones_cuenta" virtual="y" to_schema="ctm_historico" to_table="cuenta" >
+				<fk_column name="id_cuenta" pk="_id" />
+			</fk>
+		</table>
+		<table name="log" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="fecha" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="user" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="accion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="movimientos_revisados" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="fecha_insercion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_conciliacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_recaudacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="numero_telefono" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lote" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="secuencia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="monto" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="isPcmov" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="isRecaudador" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_movimientos_revisados_recaudador" virtual="y" to_schema="ctm_historico" to_table="recaudador" >
+				<fk_column name="codigo_recaudador" pk="codigo_recaudador" />
+			</fk>
+		</table>
+		<table name="pcmov" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="fecha" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="archivo" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="fileName" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="updateAt" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="fecha" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="procesado" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="recaudador" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="activo" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="credenciales_consulta" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="credenciales_recarga" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="credenciales_reverso" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="informacion" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="rif" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="razon_social" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="alias" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="contacto" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="telefono" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="settings" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="codigo_conciliacion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="ip" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="ruta" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="user" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_recaudador_archivos_conciliacion" virtual="y" to_schema="ctm_historico" to_table="archivos_conciliacion" >
+				<fk_column name="codigo_recaudador" pk="codigo_recaudador" />
+			</fk>
+			<fk name="Fk_recaudador_cuenta_transacciones" virtual="y" to_schema="ctm_historico" to_table="cuenta_transacciones" >
+				<fk_column name="codigo_recaudador" pk="codigo_recaudador" />
+			</fk>
+		</table>
+		<table name="reglas_movilnet" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="minimo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="multiplo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo_diario" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo_mensual" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="activo" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="gsm" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="par" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="impar" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="modalidad_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaRegistro" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaVencimiento" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lista_negra_long_prefijo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="schema_version" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="tipo_lista_negra" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="transaccion" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="creation_date" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_trans" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo_pago" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_terminal" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_comercio" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_empresa" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="secuencia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lote" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="monto_oper" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="cod_origen" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_subscriber" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="modalidad_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="nro_referencia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="saldo_anterior" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="saldo_nuevo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="listanegra" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_resp_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="currency" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="fechaInsercion" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="raw_data" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="request_servlet" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="request_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="response_iso" type="string" length="800" decimal="0" jt="12" />
+				<column name="response_servlet" type="string" length="800" decimal="0" jt="12" />
+			</column>
+			<column name="cod_resp_mov" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaConciliacion" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="nro_aprobacion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo_pos" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_transaccion_recaudador" virtual="y" to_schema="ctm_historico" to_table="recaudador" >
+				<fk_column name="cod_origen" pk="codigo_recaudador" />
+			</fk>
+			<fk name="Fk_transaccion_codigos_respuesta" virtual="y" to_schema="ctm_historico" to_table="codigos_respuesta" >
+				<fk_column name="cod_resp_mov" pk="codigo_resp_mov" />
+			</fk>
+		</table>
+		<table name="transacciones_por_recaudador_header_diario" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="id_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="total_trx_exitosas" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="total_trx" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="monto_total" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaRegistro" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_transacciones_por_recaudador_header_diario_recaudador" virtual="y" to_schema="ctm_historico" to_table="recaudador" >
+				<fk_column name="id_recaudador" pk="codigo_recaudador" />
+			</fk>
+		</table>
+		<table name="transacciones_por_recaudador_header_periodico" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="id_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="total_trx_exitosas" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="total_trx" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="monto_total" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaRegistro" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaInicioDelta" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaFindDelta" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_transacciones_por_recaudador_header_periodico_recaudador" virtual="y" to_schema="ctm_historico" to_table="recaudador" >
+				<fk_column name="id_recaudador" pk="codigo_recaudador" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="ctm_historico" user="admin" />
+	<layout name="Layout with Tools" id="Layout_24d5" show_column_type="y" show_relation="name" >
+		<entity schema="ctm_historico" name="User" color="BED3F4" x="1936" y="928" />
+		<entity schema="ctm_historico" name="UserGroup" color="BED3F4" x="2288" y="992" />
+		<entity schema="ctm_historico" name="UserRole" color="BED3F4" x="2288" y="816" />
+		<entity schema="ctm_historico" name="pcmov" column="archivo" color="C7F4BE" x="2176" y="80" />
+		<entity schema="ctm_historico" name="archivos_conciliacion" color="BED3F4" x="96" y="496" />
+		<entity schema="ctm_historico" name="banco" color="BED3F4" x="1184" y="1280" />
+		<entity schema="ctm_historico" name="codigo_base" color="BED3F4" x="1360" y="992" />
+		<entity schema="ctm_historico" name="codigos_respuesta" color="BED3F4" x="1536" y="688" />
+		<entity schema="ctm_historico" name="recaudador" column="contacto" color="F4DDBE" x="896" y="528" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_consulta" color="F4DDBE" x="896" y="112" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_recarga" color="F4DDBE" x="896" y="208" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_reverso" color="F4DDBE" x="896" y="304" />
+		<entity schema="ctm_historico" name="cuenta" color="BED3F4" x="800" y="1248" />
+		<entity schema="ctm_historico" name="cuenta_transacciones" color="BED3F4" x="752" y="960" />
+		<entity schema="ctm_historico" name="reglas_movilnet" column="gsm" color="BEBEF4" x="2224" y="352" />
+		<entity schema="ctm_historico" name="recaudador" column="informacion" color="F4DDBE" x="896" y="400" />
+		<entity schema="ctm_historico" name="log" color="BED3F4" x="2288" y="1184" />
+		<entity schema="ctm_historico" name="movimientos_revisados" color="BED3F4" x="80" y="112" />
+		<entity schema="ctm_historico" name="pcmov" color="C7F4BE" x="1920" y="80" />
+		<entity schema="ctm_historico" name="transaccion" column="raw_data" color="D1BEF4" x="1520" y="96" />
+		<entity schema="ctm_historico" name="recaudador" color="F4DDBE" x="608" y="112" />
+		<entity schema="ctm_historico" name="reglas_movilnet" color="BEBEF4" x="1920" y="352" />
+		<entity schema="ctm_historico" name="recaudador" column="settings" color="F4DDBE" x="896" y="656" />
+		<entity schema="ctm_historico" name="tipo_lista_negra" color="BED3F4" x="1632" y="992" />
+		<entity schema="ctm_historico" name="transaccion" color="D1BEF4" x="1264" y="96" />
+		<entity schema="ctm_historico" name="transacciones_por_recaudador_header_diario" color="BED3F4" x="64" y="1056" />
+		<entity schema="ctm_historico" name="transacciones_por_recaudador_header_periodico" color="BED3F4" x="48" y="736" />
+		<group name="banco" color="800000" >
+			<entity schema="ctm_historico" name="banco" />
+		</group>
+		<group name="pcmov" color="EEF7EC" >
+			<entity schema="ctm_historico" name="pcmov" />
+			<entity schema="ctm_historico" name="pcmov" column="archivo" />
+		</group>
+		<group name="reglas_movilnet" color="ECECF7" >
+			<entity schema="ctm_historico" name="reglas_movilnet" />
+			<entity schema="ctm_historico" name="reglas_movilnet" column="gsm" />
+		</group>
+		<group name="transaccion" color="F0ECF7" >
+			<entity schema="ctm_historico" name="transaccion" />
+			<entity schema="ctm_historico" name="transaccion" column="raw_data" />
+		</group>
+		<group name="recaudador" color="F7F2EC" >
+			<entity schema="ctm_historico" name="recaudador" />
+			<entity schema="ctm_historico" name="recaudador" column="contacto" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_consulta" />
+			<entity schema="ctm_historico" name="recaudador" column="informacion" />
+			<entity schema="ctm_historico" name="recaudador" column="settings" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_recarga" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_reverso" />
+		</group>
+		<group name="movimientos revisados" color="0000FF" >
+			<entity schema="ctm_historico" name="movimientos_revisados" />
+		</group>
+		<group name="User" color="00FF00" >
+			<entity schema="ctm_historico" name="User" />
+		</group>
+		<group name="User group" color="00FF00" >
+			<entity schema="ctm_historico" name="UserGroup" />
+		</group>
+		<group name="User role" color="00FF00" >
+			<entity schema="ctm_historico" name="UserRole" />
+		</group>
+		<group name="log" color="00FF00" >
+			<entity schema="ctm_historico" name="log" />
+		</group>
+		<group name="archivos conciliacion" color="CC8099" >
+			<entity schema="ctm_historico" name="archivos_conciliacion" />
+		</group>
+		<group name="transacciones recaudador diario" color="336666" >
+			<entity schema="ctm_historico" name="transacciones_por_recaudador_header_diario" />
+		</group>
+		<group name="transacciones recaudador periodico" color="4D8080" >
+			<entity schema="ctm_historico" name="transacciones_por_recaudador_header_periodico" />
+		</group>
+		<group name="codigos respuesta" color="FF9999" >
+			<entity schema="ctm_historico" name="codigos_respuesta" />
+		</group>
+		<group name="tipo lista negra" color="C4E0F9" >
+			<entity schema="ctm_historico" name="tipo_lista_negra" />
+		</group>
+		<group name="cuenta transacciones" color="800000" >
+			<entity schema="ctm_historico" name="cuenta_transacciones" />
+		</group>
+		<group name="cuenta" color="800000" >
+			<entity schema="ctm_historico" name="cuenta" />
+		</group>
+		<group name="codigo base" color="C4E0F9" >
+			<entity schema="ctm_historico" name="codigo_base" />
+		</group>
+		<script name="Sample Query Editor" id="Editor_2553" language="SQL" >
+			<string><![CDATA[ctm_historico.recaudador.find()
+
+//OR
+
+USE ctm_historico;
+db.recaudador.find()
+
+//OR
+
+USE ctm_historico;
+db.getCollection('recaudador').find()]]></string>
+		</script>
+		<browser id="Browse_156c" name="Sample Relational Data Explorer" confirm_updates="y" >
+			<browse_table schema="ctm_historico" entity="recaudador" x="20" y="20" width="400" height="300" record_view="y" />
+		</browser>
+		<query id="Query_13d4" name="Sample Query Builder" >
+			<query_table schema="ctm_historico" name="recaudador" alias="recaudador" x="48" y="48" >
+				<column name="_id" />
+				<column name="codigo_recaudador" />
+				<column name="activo" />
+				<column name="tipo" />
+				<column name="schema_version" />
+				<column name="credenciales_consulta" />
+				<column name="credenciales_recarga" />
+				<column name="credenciales_reverso" />
+				<column name="informacion" />
+				<column name="contacto" />
+				<column name="settings" />
+			</query_table>
+		</query>
+	</layout>
+	<layout name="Main Layout" id="Layout_718" show_column_type="y" show_relation="name" >
+		<entity schema="ctm_historico" name="User" color="BED3F4" x="1200" y="976" />
+		<entity schema="ctm_historico" name="UserGroup" color="BED3F4" x="448" y="1696" />
+		<entity schema="ctm_historico" name="UserRole" color="BED3F4" x="464" y="1520" />
+		<entity schema="ctm_historico" name="pcmov" column="archivo" color="C7F4BE" x="2224" y="176" />
+		<entity schema="ctm_historico" name="archivos_conciliacion" color="BED3F4" x="1120" y="1760" />
+		<entity schema="ctm_historico" name="banco" color="BED3F4" x="896" y="1280" />
+		<entity schema="ctm_historico" name="codigo_base" color="BED3F4" x="1200" y="1280" />
+		<entity schema="ctm_historico" name="codigos_respuesta" color="BED3F4" x="672" y="1696" />
+		<entity schema="ctm_historico" name="recaudador" column="contacto" color="F4DDBE" x="1616" y="592" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_consulta" color="F4DDBE" x="1616" y="176" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_recarga" color="F4DDBE" x="1616" y="272" />
+		<entity schema="ctm_historico" name="recaudador" column="credenciales_reverso" color="F4DDBE" x="1616" y="368" />
+		<entity schema="ctm_historico" name="cuenta" color="BED3F4" x="1200" y="1488" />
+		<entity schema="ctm_historico" name="cuenta_transacciones" color="BED3F4" x="1504" y="1760" />
+		<entity schema="ctm_historico" name="reglas_movilnet" column="gsm" color="BEBEF4" x="2272" y="576" />
+		<entity schema="ctm_historico" name="recaudador" column="informacion" color="F4DDBE" x="1616" y="464" />
+		<entity schema="ctm_historico" name="log" color="BED3F4" x="672" y="1488" />
+		<entity schema="ctm_historico" name="movimientos_revisados" color="BED3F4" x="512" y="1152" />
+		<entity schema="ctm_historico" name="pcmov" color="C7F4BE" x="1968" y="176" />
+		<entity schema="ctm_historico" name="transaccion" column="raw_data" color="D1BEF4" x="2224" y="976" />
+		<entity schema="ctm_historico" name="recaudador" color="F4DDBE" x="1328" y="176" />
+		<entity schema="ctm_historico" name="reglas_movilnet" color="BEBEF4" x="1968" y="576" />
+		<entity schema="ctm_historico" name="recaudador" column="settings" color="F4DDBE" x="1616" y="720" />
+		<entity schema="ctm_historico" name="tipo_lista_negra" color="BED3F4" x="896" y="1104" />
+		<entity schema="ctm_historico" name="transaccion" color="D1BEF4" x="1968" y="976" />
+		<entity schema="ctm_historico" name="transacciones_por_recaudador_header_diario" color="BED3F4" x="1504" y="1488" />
+		<entity schema="ctm_historico" name="transacciones_por_recaudador_header_periodico" color="BED3F4" x="48" y="1200" />
+		<callout x="1328" y="80" pointer="Round" >
+			<comment><![CDATA[Double-click collection headers or fields to edit.
+Create multiple layouts (diagrams) with the same or different collections. 
+Saving the model to file will also save the layouts.]]></comment>
+		</callout>
+		<group name="Collection &#039;banco&#039;" color="ECF0F7" >
+			<entity schema="ctm_historico" name="banco" />
+			<entity schema="ctm_historico" name="codigo_base" />
+			<entity schema="ctm_historico" name="cuenta" />
+			<entity schema="ctm_historico" name="log" />
+			<entity schema="ctm_historico" name="movimientos_revisados" />
+			<entity schema="ctm_historico" name="tipo_lista_negra" />
+			<entity schema="ctm_historico" name="User" />
+			<entity schema="ctm_historico" name="transacciones_por_recaudador_header_diario" />
+			<entity schema="ctm_historico" name="cuenta_transacciones" />
+			<entity schema="ctm_historico" name="archivos_conciliacion" />
+			<entity schema="ctm_historico" name="codigos_respuesta" />
+			<entity schema="ctm_historico" name="UserGroup" />
+			<entity schema="ctm_historico" name="UserRole" />
+			<entity schema="ctm_historico" name="transacciones_por_recaudador_header_periodico" />
+		</group>
+		<group name="Collection &#039;pcmov&#039;" color="EEF7EC" >
+			<entity schema="ctm_historico" name="pcmov" />
+			<entity schema="ctm_historico" name="pcmov" column="archivo" />
+		</group>
+		<group name="Collection &#039;reglas_movilnet&#039;" color="ECECF7" >
+			<entity schema="ctm_historico" name="reglas_movilnet" />
+			<entity schema="ctm_historico" name="reglas_movilnet" column="gsm" />
+		</group>
+		<group name="Collection &#039;transaccion&#039;" color="F0ECF7" >
+			<entity schema="ctm_historico" name="transaccion" />
+			<entity schema="ctm_historico" name="transaccion" column="raw_data" />
+		</group>
+		<group name="Collection &#039;recaudador&#039;" color="F7F2EC" >
+			<entity schema="ctm_historico" name="recaudador" />
+			<entity schema="ctm_historico" name="recaudador" column="contacto" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_consulta" />
+			<entity schema="ctm_historico" name="recaudador" column="informacion" />
+			<entity schema="ctm_historico" name="recaudador" column="settings" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_recarga" />
+			<entity schema="ctm_historico" name="recaudador" column="credenciales_reverso" />
+		</group>
+	</layout>
+</project>
