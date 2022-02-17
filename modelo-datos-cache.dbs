@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project_2233" database="MongoDb" >
+	<schema name="ctm_cache" >
+		<table name="codigo_base" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo" type="string" length="800" decimal="0" jt="12" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="codigos_respuesta" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo_resp_mov" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_resp_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="codigo_resp_base" type="array" length="800" decimal="0" jt="4999545" />
+			<column name="schema_version" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lista_negra" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="lista_negra" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="fecha_registro" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_subscriber" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<index name="fecha_registro_1" unique="UNIQUE_KEY" >
+				<column name="fecha_registro" />
+			</index>
+		</table>
+		<table name="recaudador" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="codigo_recaudador" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="activo" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="credenciales_consulta" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="credenciales_recarga" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="credenciales_reverso" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="id_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="pwd_usr" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="reglas_movilnet" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="minimo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="multiplo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo_diario" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="maximo_mensual" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="activo" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="gsm" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="par" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="impar" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="modalidad_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaRegistro" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaVencimiento" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lista_negra_long_prefijo" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="schema_version" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="tipo_lista_negra" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="topes" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="id_subscriber" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaExpiracion" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="monto" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<index name="fechaExpiracion_1" unique="UNIQUE_KEY" >
+				<column name="fechaExpiracion" />
+			</index>
+		</table>
+		<table name="transaccion" >
+			<column name="_id" type="oid" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="creation_date" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_trans" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo_pago" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_terminal" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_comercio" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_empresa" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="secuencia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lote" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="monto_oper" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_origen" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="id_subscriber" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="modalidad_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_oper" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="nro_referencia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo_pos" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_resp_mov" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_resp_base" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="saldo_anterior" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="saldo_nuevo" type="decimal128" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="nro_aprobacion" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaInsercion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaExpiracion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fechaConciliacion" type="bsontimestamp" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="lista_negra" type="boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cod_resp_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="currency" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="schema_version" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="raw_data" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="request_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="response_iso" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="request_servlet" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="response_servlet" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<index name="fechaInsercion_1" unique="UNIQUE_KEY" >
+				<column name="fechaInsercion" />
+			</index>
+			<fk name="Fk_transaccion_codigos_respuesta" virtual="y" to_schema="ctm_cache" to_table="codigos_respuesta" >
+				<fk_column name="cod_resp_mov" pk="codigo_resp_mov" />
+			</fk>
+			<fk name="Fk_transaccion_recaudador" virtual="y" to_schema="ctm_cache" to_table="recaudador" >
+				<fk_column name="cod_origen" pk="codigo_recaudador" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="ctm_cache" user="admin" />
+	<layout name="Layout with Tools" id="Layout_2196" show_column_type="y" show_relation="name" >
+		<entity schema="ctm_cache" name="codigo_base" color="BED3F4" x="240" y="912" />
+		<entity schema="ctm_cache" name="codigos_respuesta" color="BED3F4" x="208" y="640" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_consulta" color="C7F4BE" x="336" y="80" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_recarga" color="C7F4BE" x="336" y="176" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_reverso" color="C7F4BE" x="336" y="272" />
+		<entity schema="ctm_cache" name="reglas_movilnet" column="gsm" color="F4DDBE" x="944" y="80" />
+		<entity schema="ctm_cache" name="lista_negra" color="BED3F4" x="1312" y="512" />
+		<entity schema="ctm_cache" name="transaccion" column="raw_data" color="BEBEF4" x="960" y="496" />
+		<entity schema="ctm_cache" name="recaudador" color="C7F4BE" x="48" y="80" />
+		<entity schema="ctm_cache" name="reglas_movilnet" color="F4DDBE" x="640" y="80" />
+		<entity schema="ctm_cache" name="tipo_lista_negra" color="BED3F4" x="1328" y="784" />
+		<entity schema="ctm_cache" name="topes" color="BED3F4" x="1232" y="96" />
+		<entity schema="ctm_cache" name="transaccion" color="BEBEF4" x="640" y="496" />
+		<group name="codigo_base" color="0000FF" >
+			<entity schema="ctm_cache" name="codigo_base" />
+		</group>
+		<group name="reglas_movilnet" color="F7F2EC" >
+			<entity schema="ctm_cache" name="reglas_movilnet" />
+			<entity schema="ctm_cache" name="reglas_movilnet" column="gsm" />
+		</group>
+		<group name="transaccion" color="ECECF7" >
+			<entity schema="ctm_cache" name="transaccion" />
+			<entity schema="ctm_cache" name="transaccion" column="raw_data" />
+		</group>
+		<group name="recaudador" color="EEF7EC" >
+			<entity schema="ctm_cache" name="recaudador" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_consulta" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_recarga" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_reverso" />
+		</group>
+		<group name="codigos respuesta" color="0000FF" >
+			<entity schema="ctm_cache" name="codigos_respuesta" />
+		</group>
+		<group name="topes" color="FF0000" >
+			<entity schema="ctm_cache" name="topes" />
+		</group>
+		<group name="lista negra" color="FFB366" >
+			<entity schema="ctm_cache" name="lista_negra" />
+		</group>
+		<group name="tipo lista negra" color="FF9980" >
+			<entity schema="ctm_cache" name="tipo_lista_negra" />
+		</group>
+		<script name="Sample Query Editor" id="Editor_49" language="SQL" >
+			<string><![CDATA[ctm_cache.recaudador.find()
+
+//OR
+
+USE ctm_cache;
+db.recaudador.find()
+
+//OR
+
+USE ctm_cache;
+db.getCollection('recaudador').find()]]></string>
+		</script>
+		<browser id="Browse_c5f" name="Sample Relational Data Explorer" confirm_updates="y" >
+			<browse_table schema="ctm_cache" entity="recaudador" x="20" y="20" width="400" height="300" record_view="y" />
+		</browser>
+		<query id="Query_a64" name="Sample Query Builder" >
+			<query_table schema="ctm_cache" name="recaudador" alias="recaudador" x="48" y="48" >
+				<column name="_id" />
+				<column name="codigo_recaudador" />
+				<column name="activo" />
+				<column name="tipo" />
+				<column name="schema_version" />
+				<column name="credenciales_consulta" />
+				<column name="credenciales_recarga" />
+				<column name="credenciales_reverso" />
+			</query_table>
+		</query>
+	</layout>
+	<layout name="Main Layout" id="Layout_255c" show_column_type="y" show_relation="name" >
+		<entity schema="ctm_cache" name="codigo_base" color="BED3F4" x="336" y="848" />
+		<entity schema="ctm_cache" name="codigos_respuesta" color="BED3F4" x="336" y="592" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_consulta" color="C7F4BE" x="640" y="176" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_recarga" color="C7F4BE" x="640" y="272" />
+		<entity schema="ctm_cache" name="recaudador" column="credenciales_reverso" color="C7F4BE" x="640" y="368" />
+		<entity schema="ctm_cache" name="reglas_movilnet" column="gsm" color="F4DDBE" x="1248" y="176" />
+		<entity schema="ctm_cache" name="lista_negra" color="BED3F4" x="560" y="848" />
+		<entity schema="ctm_cache" name="transaccion" column="raw_data" color="BEBEF4" x="1264" y="592" />
+		<entity schema="ctm_cache" name="recaudador" color="C7F4BE" x="352" y="176" />
+		<entity schema="ctm_cache" name="reglas_movilnet" color="F4DDBE" x="944" y="176" />
+		<entity schema="ctm_cache" name="tipo_lista_negra" color="BED3F4" x="320" y="1024" />
+		<entity schema="ctm_cache" name="topes" color="BED3F4" x="48" y="800" />
+		<entity schema="ctm_cache" name="transaccion" color="BEBEF4" x="944" y="592" />
+		<callout x="352" y="80" pointer="Round" >
+			<comment><![CDATA[Double-click collection headers or fields to edit.
+Create multiple layouts (diagrams) with the same or different collections. 
+Saving the model to file will also save the layouts.]]></comment>
+		</callout>
+		<group name="Collection &#039;codigo_base&#039;" color="ECF0F7" >
+			<entity schema="ctm_cache" name="codigo_base" />
+			<entity schema="ctm_cache" name="lista_negra" />
+			<entity schema="ctm_cache" name="tipo_lista_negra" />
+			<entity schema="ctm_cache" name="topes" />
+			<entity schema="ctm_cache" name="codigos_respuesta" />
+		</group>
+		<group name="Collection &#039;reglas_movilnet&#039;" color="F7F2EC" >
+			<entity schema="ctm_cache" name="reglas_movilnet" />
+			<entity schema="ctm_cache" name="reglas_movilnet" column="gsm" />
+		</group>
+		<group name="Collection &#039;transaccion&#039;" color="ECECF7" >
+			<entity schema="ctm_cache" name="transaccion" />
+			<entity schema="ctm_cache" name="transaccion" column="raw_data" />
+		</group>
+		<group name="Collection &#039;recaudador&#039;" color="EEF7EC" >
+			<entity schema="ctm_cache" name="recaudador" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_consulta" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_recarga" />
+			<entity schema="ctm_cache" name="recaudador" column="credenciales_reverso" />
+		</group>
+	</layout>
+</project>
